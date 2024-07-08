@@ -1,0 +1,61 @@
+<div>
+  <form [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
+    <div>
+      <label for="month">Месец:</label>
+      <input type="text" id="month" formControlName="month" (input)="setupAutocomplete($event)" />
+      <ul class="autocomplete-list" *ngIf="matchingMonths.length > 0">
+        <li *ngFor="let month of matchingMonths" (click)="selectMonth(month)">{{ month }}</li>
+      </ul>
+    </div>
+
+    <div>
+      <label for="year">Година:</label>
+      <select id="year" formControlName="year" (change)="onYearChange($event)">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="category">Категорија:</label>
+      <select id="category" formControlName="category" >
+        <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+      </select>
+    </div>
+    
+
+    <div *ngIf="selectedCategory === 'Храна'">
+      <label for="food">Храна:</label>
+      <input type="number" id="food" formControlName="food" step="0.01" />
+    </div>
+
+    <div *ngIf="selectedCategory === 'Превоз'">
+      <label for="transport">Превоз:</label>
+      <input type="number" id="transport" formControlName="transport" step="0.01" />
+    </div>
+
+    <div *ngIf="selectedCategory === 'Сметки'">
+      <label for="bills">Сметки:</label>
+      <input type="number" id="bills" formControlName="bills" step="0.01" />
+    </div>
+
+    <div *ngIf="selectedCategory === 'Останато'">
+      <label for="other">Останато:</label>
+      <input type="number" id="other" formControlName="other" step="0.01" />
+    </div>
+
+    <div>
+      <label for="amount">Износ:</label>
+      <input type="text" id="amount" formControlName="amount" pattern="[0-9]+(,[0-9]{1,2})?" />
+    </div>
+    <div>
+      <label for="valueType">Вредности:</label>
+      <select id="valueType" formControlName="valueType">
+        <option value="Планирани вредности">Планирани вредности</option>
+        <option value="Реални вредности">Реални вредности</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Зачувај</button>
+    </div>
+  </form>
+</div>

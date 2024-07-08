@@ -1,0 +1,85 @@
+.income-grid {
+    width: 100%;
+    overflow-x: auto; 
+  }
+
+  .center-heading {
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  li {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  thead {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  thead th, tbody td {
+    padding: 6px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .actions-column {
+    text-align: center;
+  }
+  
+  .actions-column button {
+    margin: 2px;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  td input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+   

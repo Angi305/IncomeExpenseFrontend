@@ -1,0 +1,40 @@
+<form [formGroup]="incomeForm" (ngSubmit)="saveIncome()">
+    <div>
+      <label for="month">Месец:</label>
+      <input type="text" id="month" formControlName="month" (input)="setupAutocomplete($event)" autocomplete="off">
+      <ul *ngIf="matchingMonths.length > 0">
+        <li *ngFor="let month of matchingMonths" (click)="selectMonth(month)">{{ month }}</li>
+      </ul>
+    </div>
+    
+    <div>
+      <label for="year">Година:</label>
+      <select id="year" formControlName="year">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="category">Категорија:</label>
+      <select id="category" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="amount">Износ:</label>
+      <input type="text" id="amount" formControlName="amount">
+    </div>
+  
+    <div>
+      <label for="valueType">Вредности:</label>
+      <select id="valueType" formControlName="valueType" (change)="onValueTypeChange($event)">
+        <option value="Планирани вредности">Планирани вредности</option>
+        <option value="Реални вредности">Реални вредности</option>
+      </select>
+    </div>
+  
+    <button type="submit">Зачувај</button>
+
+  </form>
+  

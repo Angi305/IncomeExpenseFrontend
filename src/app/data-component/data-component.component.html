@@ -1,0 +1,114 @@
+<div class="center-heading"> <h2>Претходно внесени записи</h2></div>
+
+<!-- Income Records Table -->
+<h3>Приходи</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Месец</th>
+      <th>Година</th>
+      <th>Категорија</th>
+      <th>Износ</th>
+      <th>Вид на вредност</th>
+      <th>Овозможена Промена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let record of incomeRecords; let i = index">
+      <tr *ngIf="!record.isEditing; else editModeIncome">
+        <td>{{ record.month }}</td>
+        <td>{{ record.year }}</td>
+        <td>{{ record.category }}</td>
+        <td>{{ record.amount }}</td>
+        <td>{{ record.valueType }}</td>
+        <td>
+          <button (click)="editRecord(record)">Edit</button>
+          <button (click)="deleteRecord(record.id, 'income')">Delete</button>
+        </td>
+      </tr>
+      <ng-template #editModeIncome>
+        <tr>
+          <td>
+            <input type="text" id="month" [(ngModel)]="incomeRecords[i].month" (input)="setupAutocomplete($event)" autocomplete="off">
+            <ul *ngIf="matchingMonths.length > 0">
+              <li *ngFor="let month of matchingMonths" (click)="selectMonth(month, incomeRecords[i].id)">{{ month }}</li>
+            </ul>
+          </td>
+          <td>
+            <select id="year" [(ngModel)]="incomeRecords[i].year">
+              <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+            </select>
+          </td>
+          <td>{{ incomeRecords[i].category }}</td>
+          <td>
+            <input type="number" [(ngModel)]="incomeRecords[i].amount">
+          </td>
+          <td>{{ incomeRecords[i].valueType }}</td>
+          <td>
+            <div>
+              <button (click)="onIncomeSave(incomeRecords[i])">Save</button>
+              <button (click)="cancelEdit(incomeRecords[i])">Cancel</button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </ng-container>
+  </tbody>
+</table>
+
+
+<!-- Expense Records Table -->
+<h3>Трошоци</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Месец</th>
+      <th>Година</th>
+      <th>Категорија</th>
+      <th>Износ</th>
+      <th>Вид на вредност</th>
+      <th>Овозможена Промена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let record of expenseRecords; let i = index">
+      <tr *ngIf="!record.isEditing; else editModeExpense">
+        <td>{{ record.month }}</td>
+        <td>{{ record.year }}</td>
+        <td>{{ record.category }}</td>
+        <td>{{ record.amount }}</td>
+        <td>{{ record.valueType }}</td>
+        <td>
+          <button (click)="editRecord(record)">Edit</button>
+          <button (click)="deleteRecord(record.id, 'expense')">Delete</button>
+        </td>
+      </tr>
+      <ng-template #editModeExpense>
+        <tr>
+          <td>
+            <input type="text" id="month" [(ngModel)]="expenseRecords[i].month" (input)="setupAutocomplete($event)" autocomplete="off">
+            <ul *ngIf="matchingMonths.length > 0">
+              <li *ngFor="let month of matchingMonths" (click)="selectMonthForExpense(month, expenseRecords[i].id)">{{ month }}</li>
+            </ul>
+          </td>
+          <td>
+            <select id="year" [(ngModel)]="expenseRecords[i].year">
+              <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+            </select>
+          </td>
+          <td>{{ expenseRecords[i].category }}</td>
+          <td>
+            <input type="number" [(ngModel)]="expenseRecords[i].amount">
+          </td>
+          <td>{{ expenseRecords[i].valueType }}</td>
+          <td>
+            <div>
+              <button (click)="onExpenseSave(expenseRecords[i])">Save</button>
+              <button (click)="cancelEdit(expenseRecords[i])">Cancel</button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </ng-container>    
+  </tbody>
+</table>
